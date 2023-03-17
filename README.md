@@ -34,14 +34,19 @@ REGION = 'aws ec2 region'
 remark:
 
 **instance_id** - it is unique identification for ec2 instance
- 
+
 instance_id example ->  i-0114e46wafc2baffq  
 
 To get a list of instances with information about each instance 
 use the following command:
+For all instances:
 ```
-python3 main.py list 
+python3 main.py list  
 
+```
+If you need only one , run this command with --instance-id:
+```
+python3 main.py list  --instance-id your_instance_id
 ```
 screen1 
 
@@ -62,7 +67,7 @@ python3 main.py stop --instance-id your_instance_id
 ```
 screen3 
 
-Also you can use for stop and start a few ids:
+Also you can use for stop or start a few ids:
 ```
 python3 main.py stop --instance-id id1 id2 id3
 ```
@@ -70,6 +75,20 @@ python3 main.py stop --instance-id id1 id2 id3
 ### Error Handling
 
 The following is a list of possible errors and their meanings:
+
+First of all if you get an error that starts with **"Connection error"**:
+-check your internet connection
+-check if you entered the id and key aws access correctly
+-check error text
+
+Connection error header:
+
+AccessDeniedException - This error occurs when there are missing or insufficient EC2 access rights.
+InvalidSignatureException - This error occurs when the request signature is not valid.
+ClientError - This error occurs when there is an interaction error with the EC2 service.
+EndpointConnectionError - This error occurs when a connection to the EC2 server cannot be established.
+NoCredentialsError - This error occurs when access keys and secret keys are missing.
+
 _________________________________________________________________________________________________
 *No EC2 instance found* : Indicates that there are no EC2 instances available in the account.
 _________________________________________________________________________________________________
@@ -81,6 +100,6 @@ ________________________________________________________________________________
 *EC2 instance with ID {instance_id} is already stopped* : Indicates that the specified 
                                                        EC2 instance is already in a stopped state.
 _________________________________________________________________________________________________
-*User does not have sufficient permissions to start or stop instance(s)* : check your permission
-                                                                    maybe you dont have access
+*User does not have sufficient permissions to start or stop instance(s)* : Check your permission,
+                                                                    maybe you dont have access.
 _________________________________________________________________________________________________
