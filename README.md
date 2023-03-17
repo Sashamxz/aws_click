@@ -1,5 +1,5 @@
-# aws_click
- CLI tool in Python 3 to manage ec2 instances on Amazon Web Services
+
+## CLI tool in Python3 to manage ec2 instances on Amazon Web Services
 
 ### Installation instructions:
 Clone the repository using the following command:
@@ -40,12 +40,13 @@ instance_id example ->  i-0114e46wafc2baffq
 
 To get a list of instances with information about each instance 
 use the following command:
+
 For all instances:
 ```
 python3 main.py list  
 
 ```
-If you need only one , run this command with --instance-id:
+If you need only some, run this command with --instance-id:
 ```
 python3 main.py list  --instance-id your_instance_id
 ```
@@ -78,13 +79,13 @@ python3 main.py stop --instance-id id1 id2 id3
 The following is a list of possible errors and their meanings:
 
 First of all if you get an error that starts with **"Connection error"**:
-
+```
 -check your internet connection
 
 -check if you entered the id and key aws access correctly
 
--check error text
-
+-check error text, that can help you fix error
+```
 Connection error header:
 
 **AccessDeniedException** - This error occurs when there are missing or insufficient EC2 access rights.
@@ -98,7 +99,7 @@ Connection error header:
 **NoCredentialsError** - This error occurs when access keys and secret keys are missing.
 
 
-Errors that may appear when working with instances:
+#### Errors that may appear when working with instances:
 _________________________________________________________________________________________________
 *No EC2 instance found* : Indicates that there are no EC2 instances available in the account.
 _________________________________________________________________________________________________
@@ -113,3 +114,14 @@ ________________________________________________________________________________
 *User does not have sufficient permissions to start or stop instance(s)* : Check your permission,
                                                                     maybe you dont have access.
 _________________________________________________________________________________________________
+
+### References:
+[boto3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
+[github boto3](https://github.com/boto/boto3) 
+[boto3 code example](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/ec2-example-managing-instances.html)
+[argparse documentation with exapmle](https://docs.python.org/3/library/argparse.html)
+[prettytable documentation](https://pypi.org/project/prettytable/)
+[tqdm documentation](https://tqdm.github.io/docs/tqdm/)
+[also I have used stackoveflow](https://stackoverflow.com/questions/42809096/difference-in-boto3-between-resource-client-and-session)
+[for readme](https://markdown.rozh2sch.org.ua/#%D0%BF%D1%83%D1%82%D1%96%D0%B2%D0%BD%D0%B8%D0%BA-%D0%BF%D0%BE-markdown)
+also I found  answers in other forums
