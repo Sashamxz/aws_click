@@ -30,7 +30,7 @@ SECRET_ACCESS_KEY = 'your access key'
 REGION = 'aws ec2 region'
 ```
 
-### Usage:
+###Usage:
 remark:
 
 **instance_id** - it is unique identification for ec2 instance
