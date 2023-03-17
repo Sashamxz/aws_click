@@ -1,7 +1,7 @@
 # aws_click
  CLI tool in Python 3 to manage ec2 instances on Amazon Web Services
 
-###Installation instructions:
+### Installation instructions:
 Clone the repository using the following command:
 ```
 git clone https://github.com/Sashamxz/aws_click.git
@@ -30,9 +30,11 @@ SECRET_ACCESS_KEY = 'your access key'
 REGION = 'aws ec2 region'
 ```
 
-###Usage:
+### Usage:
 remark:
-**instance_id** - it is unique identification for ec2 instance 
+
+**instance_id** - it is unique identification for ec2 instance
+ 
 instance_id example ->  i-0114e46wafc2baffq  
 
 To get a list of instances with information about each instance 
@@ -65,7 +67,8 @@ Also you can use for stop and start a few ids:
 python3 main.py stop --instance-id id1 id2 id3
 ```
 
-Error Handling
+### Error Handling
+
 The following is a list of possible errors and their meanings:
 _________________________________________________________________________________________________
 *No EC2 instance found* : Indicates that there are no EC2 instances available in the account.
