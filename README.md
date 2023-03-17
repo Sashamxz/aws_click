@@ -50,7 +50,9 @@ If you need only some, run this command with --instance-id:
 ```
 python3 main.py list  --instance-id your_instance_id
 ```
-screen1 
+
+![Screenshot list](./screenshot/screen1.png) 
+
 
 Start an instance by ID:
 
@@ -58,7 +60,8 @@ Start an instance by ID:
 python3 main.py start --instance-id your_instance_id
 
 ```
-screen2 
+
+![Screenshot start](./screenshot/start.png)
 
 
 For a stop instance by ID :
@@ -67,7 +70,9 @@ For a stop instance by ID :
 python3 main.py stop --instance-id your_instance_id
 
 ```
-screen3 
+
+![Screenshot stop](./screenshot/stop.png) 
+
 
 Also you can use for stop or start a few ids:
 ```
@@ -117,11 +122,19 @@ ________________________________________________________________________________
 
 ### References:
 [boto3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
-[github boto3](https://github.com/boto/boto3) 
+
+[github boto3](https://github.com/boto/boto3)
+
 [boto3 code example](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/ec2-example-managing-instances.html)
+
 [argparse documentation with exapmle](https://docs.python.org/3/library/argparse.html)
+
 [prettytable documentation](https://pypi.org/project/prettytable/)
+
 [tqdm documentation](https://tqdm.github.io/docs/tqdm/)
+
 [also I have used stackoveflow](https://stackoverflow.com/questions/42809096/difference-in-boto3-between-resource-client-and-session)
+
 [for readme](https://markdown.rozh2sch.org.ua/#%D0%BF%D1%83%D1%82%D1%96%D0%B2%D0%BD%D0%B8%D0%BA-%D0%BF%D0%BE-markdown)
+
 also I found  answers in other forums
