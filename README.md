@@ -46,13 +46,13 @@ For all instances:
 python3 main.py list  
 
 ```
+
+![Screenshot list](./screenshot/screen1.png) 
+
 If you need only some, run this command with --instance-id:
 ```
 python3 main.py list  --instance-id your_instance_id
 ```
-
-![Screenshot list](./screenshot/screen1.png) 
-
 
 Start an instance by ID:
 
@@ -83,13 +83,13 @@ python3 main.py stop --instance-id id1 id2 id3
 
 The following is a list of possible errors and their meanings:
 
-First of all if you get an error that starts with **"Connection error"**:
+First of all, if you get an error that starts with **"Connection error"**:
 ```
 -check your internet connection
 
 -check if you entered the id and key aws access correctly
 
--check error text, that can help you fix error
+-check error text, which can help you fix the error
 ```
 Connection error header:
 
@@ -116,8 +116,8 @@ ________________________________________________________________________________
 *EC2 instance with ID {instance_id} is already stopped* : Indicates that the specified 
                                                        EC2 instance is already in a stopped state.
 _________________________________________________________________________________________________
-*User does not have sufficient permissions to start or stop instance(s)* : Check your permission,
-                                                                    maybe you dont have access.
+*User does not have sufficient permissions to start or stop the instance(s)* : Check your permission,
+                                                                    maybe you need access.
 _________________________________________________________________________________________________
 
 ### References:
@@ -137,4 +137,4 @@ ________________________________________________________________________________
 
 [for readme](https://markdown.rozh2sch.org.ua/#%D0%BF%D1%83%D1%82%D1%96%D0%B2%D0%BD%D0%B8%D0%BA-%D0%BF%D0%BE-markdown)
 
-also I found  answers in other forums
+also I founded  answers in other forums
