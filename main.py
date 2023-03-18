@@ -1,5 +1,5 @@
 import argparse
-from service import list_instances, start_instances, stop_instances, \
+from app.service import list_instances, start_instances, stop_instances, \
                     get_instance_list
 
 

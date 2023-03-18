@@ -1,5 +1,5 @@
 import boto3
-from config import settings_dict
+from app.config import settings_dict
 
 
 config = settings_dict['developing']

@@ -25,6 +25,7 @@ region_name = ["us-east-1",
 
 
 class Config:
+    dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
     ACCESS_KEY_ID = os.getenv("ACCESS_KEY_ID")
     SECRET_ACCESS_KEY = os.getenv("SECRET_ACCESS_KEY")
     REGION = os.getenv("REGION")
