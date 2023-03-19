@@ -8,7 +8,8 @@ parser = argparse.ArgumentParser(
                                 formatter_class=argparse.RawTextHelpFormatter,
                                 description='CLI tool in Python that for' +
                                 'control EC2 instances on AWS \n\n' +
-                                'command example:python3 main.py {start,stop,list} {--all,--instance-id}')
+                                'command example:python3 main.py' +
+                                '{start,stop,list} {--all,--instance-id}')
 
 
 parser.add_argument('command', nargs='+', choices=['start', 'stop', 'list'],
