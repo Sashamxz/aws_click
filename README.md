@@ -41,7 +41,15 @@ instance_id example ->  i-0114e46wafc2baffq
 To get a list of instances with information about each instance 
 use the following command:
 
-For all instances:
+there two args for a start or stop command:
+
+```
+--instance-id    #for select some instance(s) 
+
+--all            #for select all instances 
+```
+
+For show list of all instances:
 ```
 python3 main.py list  
 
@@ -49,7 +57,7 @@ python3 main.py list
 
 ![Screenshot list](./screenshot/screen1.png) 
 
-If you need only some, run this command with --instance-id:
+If you need information only about some, run this command with --instance-id:
 ```
 python3 main.py list  --instance-id your_instance_id
 ```
@@ -76,8 +84,16 @@ python3 main.py stop --instance-id your_instance_id
 
 Also you can use for stop or start a few ids:
 ```
-python3 main.py stop --instance-id id1 id2 id3
+python3 main.py stop --instance-id id1 id3
 ```
+
+If you want to start or to stop **all** instances use **--all** options:
+```
+python3 main.py start --all
+```
+![Screenshot stop](./screenshot/screen_all.png) 
+
+
 
 ### Error Handling:
 
@@ -87,21 +103,22 @@ First of all, if you get an error that starts with **"Connection error"**:
 ```
 -check your internet connection
 
--check if you entered the id and key aws access correctly
+-check if you entered the id and key and region aws access correctly 
 
 -check error text, which can help you fix the error
 ```
-Connection error header:
+Connection error headers:
 
-**AccessDeniedException** - This error occurs when there are missing or insufficient EC2 access rights.
+**AccessDeniedException** -     This error occurs when there are missing or insufficient EC2 access rights.
 
 **InvalidSignatureException** - This error occurs when the request signature is not valid.
 
-**ClientError** - This error occurs when there is an interaction error with the EC2 service.
+**ClientError** -               This error occurs when there is an interaction error with the EC2 service.
 
-**EndpointConnectionError** - This error occurs when a connection to the EC2 server cannot be established.
+**EndpointConnectionError** -   This error occurs when a connection to the EC2 server cannot be established.
 
-**NoCredentialsError** - This error occurs when access keys and secret keys are missing.
+**NoCredentialsError** -        This error occurs when access keys and secret keys are missing.
+
 
 
 #### Errors that may appear when working with instances:
@@ -122,6 +139,8 @@ ________________________________________________________________________________
 
 ### References:
 [boto3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
+
+[boto3  article with best explanations](https://unbiased-coder.com/boto3-ec2-create-launch-stop/)
 
 [github boto3](https://github.com/boto/boto3)
 
