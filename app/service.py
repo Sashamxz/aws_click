@@ -77,6 +77,9 @@ def start_instances(instance_ids=None, all_instances=False):
         instance_list = get_instance_list()
         instance_ids = [instance['InstanceId'] for instance in instance_list
                         if instance['State']['Name'] != 'running']
+        if not instance_ids:
+            print('No instances available for starting')
+            exit()
 
     if not instance_ids:
         print('No EC2 instance ID provided')
@@ -112,10 +115,13 @@ def stop_instances(instance_ids=None, all_instances=False):
         instance_ids = [instance['InstanceId'] for instance in instance_list
                         if instance['State']['Name']
                         not in ['stopped', 'stopping']]
-
-    if not instance_ids:
-        print('No EC2 instance ID provided')
-        return
+        if not instance_ids:
+            print('No instances available for stopping')
+            exit()
+    else:
+        if not instance_ids:
+            print('No EC2 instance ID provided')
+            exit()
 
     # Check user permissions
     # if not check_permissions(instance_ids):
@@ -126,14 +132,15 @@ def stop_instances(instance_ids=None, all_instances=False):
         instance = get_instance_by_id(instance_id)
 
         if instance['State']['Name'] in ['stopped', 'stopping']:
-            print(f'EC2 instance with ID {instance_id} is already stoped')
+            print(f'EC2 instance with ID {instance_id} is already stopped')
             if len(instance_ids) == 1:
                 return
             continue
 
-        for i in tqdm(range(100), desc=f'Stoping instance-{instance_id}'):
+        for i in tqdm(range(100), desc=f'Stopping instance-{instance_id}'):
             ec2.stop_instances(InstanceIds=[instance_id])
             time.sleep(0.5)
         print()
 
     print(f'EC2 instance with ID {", ".join(instance_ids)} was stopped')
+    return
