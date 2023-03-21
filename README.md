@@ -51,10 +51,9 @@ there two args for a start or stop command:
 
 --all            #for select all instances 
 
-==Don`t use the --all and --instance-id parameter together!==
-
-
 ```
+==Dont use the --all and --instance-id parameter together!==
+
 
 For show list of all instances:
 ```
