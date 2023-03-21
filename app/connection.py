@@ -2,7 +2,7 @@ import boto3
 from app.config import settings_dict
 
 
-config = settings_dict['developing']
+config = settings_dict['development']
 
 
 try:

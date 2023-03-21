@@ -9,7 +9,8 @@ parser = argparse.ArgumentParser(
                                 description='CLI tool in Python that for' +
                                 'control EC2 instances on AWS \n\n' +
                                 'command example:python3 main.py' +
-                                '{start,stop,list} {--all,--instance-id}')
+                                '{start,stop,list} {--all,--instance-id}'
+                                )
 
 
 parser.add_argument('command', nargs='+', choices=['start', 'stop', 'list'],
@@ -31,8 +32,7 @@ if __name__ == '__main__':
 
     if args.instance_ids and args.all:
         print('Don`t use the --all and --instance-id parameter together')
-        exit()
-
+        quit()
     if args.command[0] == 'start':
         if args.all:
             start_instances(all_instances=True)

@@ -1,23 +1,24 @@
-import time
+import sys
 from prettytable import PrettyTable
 from tqdm import tqdm
 from app.connection import ec2
+from botocore.exceptions import ClientError
 
 
-# check user permission
-# def check_permissions(instance_ids):
-#     for instance_id in instance_ids:
-#         response = (
-#             ec2.describe_instance_attribute(InstanceId=instance_id,
-#                                             Attribute='disableApiTermination')
-#         )
-
-#         for attribute in response['DisableApiTermination']['Value']:
-#             if attribute['Value'] is True:
-#                 print(f'User does not have sufficient permissions to \
-#                       start or stop instance {instance_id}')
-#                 return False
-#     return True
+# check user permissions
+def check_permission(action, instance_id):
+    try:
+        if action == 'start':
+            ec2.start_instances(InstanceIds=[instance_id], DryRun=True)
+        elif action == 'stop':
+            ec2.stop_instances(InstanceIds=[instance_id], DryRun=True)
+        return True
+    except ClientError as e:
+        if 'DryRunOperation' not in str(e):
+            print(f'Client error : {e}')
+            return False
+        else:
+            return True
 
 
 # get instance by ID
@@ -73,43 +74,52 @@ def list_instances(instance_id=None):
 # start ec2 instance(s)
 def start_instances(instance_ids=None, all_instances=False):
 
+    # if we use command 'start' with '--all'
     if all_instances:
         instance_list = get_instance_list()
         instance_ids = [instance['InstanceId'] for instance in instance_list
                         if instance['State']['Name'] != 'running']
         if not instance_ids:
             print('No instances available for starting')
-            exit()
+            sys.exit()
 
+    # if we use start --instance-id id1 id2 ...
     if not instance_ids:
         print('No EC2 instance ID provided')
-        return
+        sys.exit()
 
-    # Check user permissions
-    # if not check_permissions(instance_ids,'start'):
-    #     return
-
+    started_instances = []
     for instance_id in instance_ids:
-
         instance = get_instance_by_id(instance_id)
 
         if instance['State']['Name'] == 'running':
             print(f'EC2 instance with ID {instance_id} is already running')
             if len(instance_ids) == 1:
-                return
+                exit()
+            continue
+
+        # Check user permissions
+        if not check_permission('start', instance_id):
+            print('User does not have sufficient permissions for'
+                  ' starting the instance')
             continue
 
         for i in tqdm(range(100), desc=f'Starting instance- {instance_id}'):
             ec2.start_instances(InstanceIds=[instance_id])
-            time.sleep(0.5)
+        started_instances.append(instance_id)
         print()
 
-    print(f'EC2 instance with ID {", ".join(instance_ids)} was started')
+    if started_instances:
+        print(f'EC2 instance with ID {", ".join(started_instances)}'
+              ' was started')
+    else:
+        print('No instances were started')
 
 
 # stop ec2 instance(s)
 def stop_instances(instance_ids=None, all_instances=False):
 
+    # if we use command 'start' with '--all'
     if all_instances:
         instance_list = get_instance_list()
         instance_ids = [instance['InstanceId'] for instance in instance_list
@@ -117,30 +127,39 @@ def stop_instances(instance_ids=None, all_instances=False):
                         not in ['stopped', 'stopping']]
         if not instance_ids:
             print('No instances available for stopping')
-            exit()
-    else:
-        if not instance_ids:
-            print('No EC2 instance ID provided')
-            exit()
+            sys.exit()
 
-    # Check user permissions
-    # if not check_permissions(instance_ids):
-    #     return
+    # if we use command 'start' with '--instance-id'
+    elif not instance_ids:
+        print('No EC2 instance ID provided')
+        sys.exit()
+
+    stopped_instances = []
 
     for instance_id in instance_ids:
 
         instance = get_instance_by_id(instance_id)
 
         if instance['State']['Name'] in ['stopped', 'stopping']:
-            print(f'EC2 instance with ID {instance_id} is already stopped')
+            print(f'EC2 instance with ID {instance_id} is already stopped \n')
+            # if we had only one instance in list , which is already stopped
             if len(instance_ids) == 1:
-                return
+                sys.exit()
+            continue
+
+        # Check user permissions
+        if not check_permission('stop', instance_id):
+            print('User does not have sufficient permissions for'
+                  ' stopping the instance')
             continue
 
         for i in tqdm(range(100), desc=f'Stopping instance-{instance_id}'):
             ec2.stop_instances(InstanceIds=[instance_id])
-            time.sleep(0.5)
+        stopped_instances.append(instance_id)
         print()
 
-    print(f'EC2 instance with ID {", ".join(instance_ids)} was stopped')
-    return
+    if stopped_instances:
+        print(f'EC2 instance with ID {", ".join(stopped_instances)}'
+              ' was stopped')
+    else:
+        print('No instances were stopped')

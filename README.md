@@ -15,7 +15,10 @@ cd aws_click
 Create and activate a virtual environment:
 ```
 python3 -m venv venv
-source venv/bin/activate
+
+source venv/bin/activate   - for Linux;
+
+venv\Scripts\activate. bat - for Windows;
 ```
 
 Install the dependencies listed in the requirements.txt file:
@@ -62,6 +65,8 @@ If you need information only about some, run this command with --instance-id:
 python3 main.py list  --instance-id your_instance_id
 ```
 
+![Screenshot list](./screenshot/wan_list.png) 
+
 Start an instance by ID:
 
 ```
@@ -93,7 +98,13 @@ python3 main.py start --all
 ```
 ![Screenshot stop](./screenshot/screen_all.png) 
 
+If you user command start or stop for few ids and one of them 
+already starte or stopped or started a message about this will appear:
 
+```
+ python3 main.py stop --instance-id id1 id2
+```
+![Screenshot done](./screenshot/wan_of.png)
 
 ### Error Handling:
 
@@ -136,11 +147,16 @@ ________________________________________________________________________________
 *User does not have sufficient permissions to start or stop the instance(s)* : Check your permission,
                                                                     maybe you need access.
 _________________________________________________________________________________________________
+*No instances available for starting/stipping* :  All instance already is started/stopped.
+
+
 
 ### References:
 [boto3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
 
 [boto3  article with best explanations](https://unbiased-coder.com/boto3-ec2-create-launch-stop/)
+
+[aws api](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyInstanceAttribute.html)
 
 [github boto3](https://github.com/boto/boto3)
 
