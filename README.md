@@ -18,7 +18,7 @@ python3 -m venv venv
 
 source venv/bin/activate   - for Linux;
 
-venv\Scripts\activate. bat - for Windows;
+venv\Scripts\activate.bat  - for Windows;
 ```
 
 Install the dependencies listed in the requirements.txt file:
@@ -50,6 +50,10 @@ there two args for a start or stop command:
 --instance-id    #for select some instance(s) 
 
 --all            #for select all instances 
+
+==Don`t use the --all and --instance-id parameter together!==
+
+
 ```
 
 For show list of all instances:
@@ -87,24 +91,27 @@ python3 main.py stop --instance-id your_instance_id
 ![Screenshot stop](./screenshot/stop.png) 
 
 
-Also you can use for stop or start a few ids:
+Also, you can use it to stop or start a few IDs:
 ```
 python3 main.py stop --instance-id id1 id3
 ```
 
 If you want to start or to stop **all** instances use **--all** options:
+
 ```
 python3 main.py start --all
 ```
 ![Screenshot stop](./screenshot/screen_all.png) 
 
-If you user command start or stop for few ids and one of them 
-already starte or stopped or started a message about this will appear:
+If you use the start or stop command for a few IDs and one of them is already started or 
+stopped or started, a message about this will appear:
 
 ```
  python3 main.py stop --instance-id id1 id2
 ```
 ![Screenshot done](./screenshot/wan_of.png)
+
+
 
 ### Error Handling:
 
