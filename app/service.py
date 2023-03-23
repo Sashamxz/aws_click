@@ -1,4 +1,3 @@
-import sys
 from prettytable import PrettyTable
 from tqdm import tqdm
 from app.connection import ec2
@@ -74,6 +73,11 @@ def list_instances(instance_id=None):
 # start ec2 instance(s)
 def start_instances(instance_ids=None, all_instances=False):
 
+    # if we use start --instance-id id1 id2 ...
+    if instance_ids is not None and len(instance_ids) == 0:
+        print('No EC2 instance ID provided')
+        return False
+
     # if we use command 'start' with '--all'
     if all_instances:
         instance_list = get_instance_list()
@@ -81,12 +85,7 @@ def start_instances(instance_ids=None, all_instances=False):
                         if instance['State']['Name'] != 'running']
         if not instance_ids:
             print('No instances available for starting')
-            sys.exit()
-
-    # if we use start --instance-id id1 id2 ...
-    if not instance_ids:
-        print('No EC2 instance ID provided')
-        sys.exit()
+            return False
 
     started_instances = []
     for instance_id in instance_ids:
@@ -95,7 +94,7 @@ def start_instances(instance_ids=None, all_instances=False):
         if instance['State']['Name'] == 'running':
             print(f'EC2 instance with ID {instance_id} is already running')
             if len(instance_ids) == 1:
-                exit()
+                return False
             continue
 
         # Check user permissions
@@ -112,14 +111,20 @@ def start_instances(instance_ids=None, all_instances=False):
     if started_instances:
         print(f'EC2 instance with ID {", ".join(started_instances)}'
               ' was started')
+        return True
     else:
         print('No instances were started')
+        return False
 
 
 # stop ec2 instance(s)
 def stop_instances(instance_ids=None, all_instances=False):
+    # if we use stop --instance-id id1 id2 ...
+    if instance_ids is not None and len(instance_ids) == 0:
+        print('No EC2 instance ID provided')
+        return False
 
-    # if we use command 'start' with '--all'
+    # if we use command 'stop' with '--all'
     if all_instances:
         instance_list = get_instance_list()
         instance_ids = [instance['InstanceId'] for instance in instance_list
@@ -127,24 +132,17 @@ def stop_instances(instance_ids=None, all_instances=False):
                         not in ['stopped', 'stopping']]
         if not instance_ids:
             print('No instances available for stopping')
-            sys.exit()
-
-    # if we use command 'start' with '--instance-id'
-    elif not instance_ids:
-        print('No EC2 instance ID provided')
-        sys.exit()
+            return False
 
     stopped_instances = []
-
     for instance_id in instance_ids:
-
         instance = get_instance_by_id(instance_id)
 
         if instance['State']['Name'] in ['stopped', 'stopping']:
             print(f'EC2 instance with ID {instance_id} is already stopped \n')
             # if we had only one instance in list , which is already stopped
             if len(instance_ids) == 1:
-                sys.exit()
+                return False
             continue
 
         # Check user permissions
@@ -161,5 +159,7 @@ def stop_instances(instance_ids=None, all_instances=False):
     if stopped_instances:
         print(f'EC2 instance with ID {", ".join(stopped_instances)}'
               ' was stopped')
+        return True
     else:
         print('No instances were stopped')
+        return False

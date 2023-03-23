@@ -1,3 +1,4 @@
+import sys
 import argparse
 from app.service import list_instances, start_instances, stop_instances
 
@@ -28,21 +29,31 @@ parser.add_argument('--all', action='store_true',
 if __name__ == '__main__':
     args = parser.parse_args()
 
-    instance_ids = args.instance_ids or []
+    instance_ids = args.instance_ids if args.instance_ids is not None else []
 
     if args.instance_ids and args.all:
         print('Don`t use the --all and --instance-id parameter together')
         quit()
+
     if args.command[0] == 'start':
+
         if args.all:
-            start_instances(all_instances=True)
-        start_instances(instance_ids)
+            started = start_instances(all_instances=True)
+        else:
+            started = start_instances(instance_ids)
+
+        if not started:
+            sys.exit(1)
 
     elif args.command[0] == 'stop':
-        if args.all:
-            stop_instances(all_instances=True)
 
-        stop_instances(instance_ids)
+        if args.all:
+            stopped = stop_instances(all_instances=True)
+        else:
+            stopped = stop_instances(instance_ids)
+
+        if not stopped:
+            sys.exit(1)
 
     elif args.command[0] == 'list':
         list_instances(instance_ids)

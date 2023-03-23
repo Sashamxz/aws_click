@@ -41,9 +41,6 @@ remark:
 instance_id example ->  i-0114e46wafc2baffq  
 
 
-To get a list of instances with information about each instance 
-use the following command:
-
 there two args for a start or stop command:
 
 ```
@@ -54,6 +51,8 @@ there two args for a start or stop command:
 Dont use the --all and --instance-id parameter together!
 ```
 
+To get a list of instances with information about each instance 
+use the following command:
 
 For show list of all instances:
 ```
@@ -103,7 +102,7 @@ python3 main.py start --all
 ![Screenshot stop](./screenshot/screen_all.png) 
 
 If you use the start or stop command for a few IDs and one of them is already started or 
-stopped or started, a message about this will appear:
+stopped , a message about this will appear:
 
 ```
  python3 main.py stop --instance-id id1 id2
@@ -120,7 +119,7 @@ First of all, if you get an error that starts with **"Connection error"**:
 ```
 -check your internet connection
 
--check if you entered the id and key and region aws access correctly 
+-check if you entered the id , key and region aws access correctly 
 
 -check error text, which can help you fix the error
 ```
@@ -140,20 +139,20 @@ Connection error headers:
 
 #### Errors that may appear when working with instances:
 _________________________________________________________________________________________________
-*No EC2 instance found* : Indicates that there are no EC2 instances available in the account.
+*No EC2 instance found*       : Indicates that there are no EC2 instances available in the account.
 _________________________________________________________________________________________________
 *No EC2 instance ID provided* : Indicates that an EC2 instance ID was not provided.
 _________________________________________________________________________________________________
-*EC2 instance with ID {instance_id} is already running* : Indicates that the specified 
-                                                      EC2 instance is already in a running state.
+*EC2 instance with ID {instance_id} 
+is already running*           : Indicates that the specified EC2 instance is already in a running state.
 _________________________________________________________________________________________________
-*EC2 instance with ID {instance_id} is already stopped* : Indicates that the specified 
-                                                       EC2 instance is already in a stopped state.
+*EC2 instance with ID {instance_id}
+ is already stopped*          : Indicates that the specified EC2 instance is already in a stopped state.
 _________________________________________________________________________________________________
-*User does not have sufficient permissions to start or stop the instance(s)* : Check your permission,
-                                                                    maybe you need access.
+*User does not have sufficient 
+permissions to start or stop the instance(s)*   : Check your permissions maybe you need access.
 _________________________________________________________________________________________________
-*No instances available for starting/stipping* :  All instance already is started/stopped.
+*No instances available for starting/stipping*  :  All instance is already  started/stopped.
 
 
 
