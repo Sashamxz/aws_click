@@ -138,7 +138,7 @@ Connection error headers:
 
 
 
-#### Errors that may appear when working with instances:
+### Errors that may appear when working with instances:
 _________________________________________________________________________________________________
 *No EC2 instance found*       : Indicates that there are no EC2 instances available in the account.
 _________________________________________________________________________________________________
