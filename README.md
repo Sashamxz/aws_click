@@ -125,15 +125,15 @@ First of all, if you get an error that starts with **"Connection error"**:
 ```
 Connection error headers:
 
-**AccessDeniedException** -     This error occurs when there are missing or insufficient EC2 access rights.
+**AccessDeniedException**     -   This error occurs when there are missing or insufficient EC2 access rights.
 
-**InvalidSignatureException** - This error occurs when the request signature is not valid.
+**InvalidSignatureException** -   This error occurs when the request signature is not valid.
 
-**ClientError** -               This error occurs when there is an interaction error with the EC2 service.
+**ClientError**               -   This error occurs when there is an interaction error with the EC2 service.
 
-**EndpointConnectionError** -   This error occurs when a connection to the EC2 server cannot be established.
+**EndpointConnectionError**   -   This error occurs when a connection to the EC2 server cannot be established.
 
-**NoCredentialsError** -        This error occurs when access keys and secret keys are missing.
+**NoCredentialsError**        -   This error occurs when access keys and secret keys are missing.
 
 
 
